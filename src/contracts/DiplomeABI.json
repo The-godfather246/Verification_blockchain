@@ -1,0 +1,101 @@
+[
+  {
+    "inputs": [],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "hash",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "titre",
+        "type": "string"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "institution",
+        "type": "address"
+      }
+    ],
+    "name": "DiplomeCreated",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "hash",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "string",
+        "name": "titre",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "etudiant",
+        "type": "string"
+      }
+    ],
+    "name": "creerDiplome",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "hash",
+        "type": "bytes32"
+      }
+    ],
+    "name": "verifierDiplome",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "string",
+            "name": "titre",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "etudiant",
+            "type": "string"
+          },
+          {
+            "internalType": "address",
+            "name": "institution",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "dateCreation",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "existe",
+            "type": "bool"
+          }
+        ],
+        "internalType": "struct Diplome.DiplomeInfo",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
+] 
