@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import { Html5QrcodeScanner } from 'html5-qrcode';
 import { FaSearch, FaQrcode, FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
 
+// Définir l'URL de l'API
+const API_URL = 'http://localhost:5000/api'; // Assurez-vous que cela correspond à votre configuration
+
 const VerificationContainer = styled.div`
   padding: 40px 20px;
   max-width: 900px;
@@ -212,26 +215,20 @@ function VerificationDiplome() {
   const verifierDiplomeHash = async (hash) => {
     setLoading(true);
     try {
-      // Récupérer les données du localStorage
-      const diplomes = JSON.parse(localStorage.getItem('diplomes') || '[]');
-      const diplome = diplomes.find(d => d.hash === hash);
-
-      if (diplome) {
-        setDiplomeInfo({
-          ...diplome,
-          verifie: true,
-          dateDelivrance: new Date(diplome.dateObtention)
-        });
+      const response = await fetch(`${API_URL}/diplomes/${hash}`);
+      if (!response.ok) {
+        if (response.status === 404) {
+          setDiplomeInfo({ error: "Diplôme non trouvé dans la base de données" });
+        } else {
+          throw new Error('Erreur lors de la vérification du diplôme');
+        }
       } else {
-        setDiplomeInfo({
-          error: "Diplôme non trouvé dans la base de données"
-        });
+        const diplome = await response.json();
+        setDiplomeInfo(diplome);
       }
     } catch (error) {
-      console.error('Erreur:', error);
-      setDiplomeInfo({
-        error: "Erreur lors de la vérification du diplôme"
-      });
+      console.error('Erreur lors de la vérification:', error);
+      setDiplomeInfo({ error: "Erreur lors de la vérification du diplôme" });
     }
     setLoading(false);
   };
