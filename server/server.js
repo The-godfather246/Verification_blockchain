@@ -44,11 +44,9 @@ app.get('/api/diplomes/:hash', async (req, res) => {
 
 app.get('/api/diplomes', async (req, res) => {
   try {
-    const diplomes = await Diplome.find().sort({ dateCreation: -1 });
-    console.log(`${diplomes.length} diplômes trouvés`); // Pour le débogage
+    const diplomes = await Diplome.find();
     res.json(diplomes);
   } catch (error) {
-    console.error('Erreur lors de la récupération des diplômes:', error);
     res.status(500).json({ message: error.message });
   }
 });
