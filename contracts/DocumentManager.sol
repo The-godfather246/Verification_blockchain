@@ -25,6 +25,7 @@ contract DocumentManager {
     mapping(address => User) public users;
     
     event UserAdded(address indexed userAddress, UserRole role);
+    event UserRoleUpdated(address indexed userAddress, UserRole role);
     event DocumentCreated(string indexed hash, address creator);
     event DocumentStatusChanged(string indexed hash, bool isValid);
     
@@ -37,6 +38,7 @@ contract DocumentManager {
         _;
     }
     
+    // Ajouter un nouveau document
     function createDocument(string memory _hash, string memory _qrCode) public {
         require(documents[_hash].timestamp == 0, "Document already exists");
         
@@ -51,6 +53,7 @@ contract DocumentManager {
         emit DocumentCreated(_hash, msg.sender);
     }
     
+    // Vérifier si un document est valide
     function verifyDocument(string memory _hash) public view returns (bool) {
         return documents[_hash].isValid;
     }
@@ -59,6 +62,7 @@ contract DocumentManager {
     function addUser(address _userAddress, UserRole _role, string memory _name) public onlyAdmin {
         require(_userAddress != address(0), "Invalid address");
         require(_role != UserRole.NONE, "Invalid role");
+        require(users[_userAddress].userAddress == address(0), "User already exists"); // Vérifie que l'utilisateur n'existe pas déjà
         
         users[_userAddress] = User({
             userAddress: _userAddress,
@@ -69,6 +73,15 @@ contract DocumentManager {
         
         emit UserAdded(_userAddress, _role);
     }
+
+    // Mettre à jour le rôle d'un utilisateur
+    function updateUserRole(address _userAddress, UserRole _newRole) public onlyAdmin {
+        require(users[_userAddress].userAddress != address(0), "User does not exist");
+        require(_newRole != UserRole.NONE, "Invalid role");
+        
+        users[_userAddress].role = _newRole;
+        emit UserRoleUpdated(_userAddress, _newRole);
+    }
     
     // Invalider un document
     function invalidateDocument(string memory _hash) public onlyAdmin {
@@ -77,10 +90,16 @@ contract DocumentManager {
         emit DocumentStatusChanged(_hash, false);
     }
     
-    // Vérifier si l'utilisateur a un rôle spécifique
+    // Ajouter un nouvel administrateur
+    function addAdministrator(address _adminAddress) public onlyAdmin {
+        require(_adminAddress != address(0), "Invalid address");
+        administrators[_adminAddress] = true;
+    }
+    
+    // Vérifier si un utilisateur a un rôle spécifique
     modifier hasRole(UserRole _role) {
         require(users[msg.sender].role == _role, "Unauthorized role");
         require(users[msg.sender].isActive, "User is not active");
         _;
     }
-} 
+}

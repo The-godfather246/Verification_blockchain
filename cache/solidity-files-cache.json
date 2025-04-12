@@ -1,12 +1,12 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "D:\\Blockchain\\contracts\\DocumentManager.sol": {
-      "lastModificationDate": 1737756861131,
-      "contentHash": "c0e352529e2133e1328b6e29946ef955",
+    "D:\\lil_silicone_valley'dev\\Verification_blockchain\\contracts\\DocumentManager.sol": {
+      "lastModificationDate": 1743852648324,
+      "contentHash": "37d3c21560e706d3309929df0de5e4ef",
       "sourceName": "contracts/DocumentManager.sol",
       "solcConfig": {
-        "version": "0.8.0",
+        "version": "0.8.19",
         "settings": {
           "optimizer": {
             "enabled": false,
