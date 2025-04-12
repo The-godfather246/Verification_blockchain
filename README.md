@@ -96,6 +96,51 @@ PRIVATE_KEY=ta_clé_privée
 SEPOLIA_URL=https://sepolia.infura.io/v3/ton_project_id
 ETHERSCAN_API_KEY=ta_clé_etherscan
 ```
+---
+
+### 📄 Configuration de l’environnement `.env`  
+
+Dans le dossier racine du projet, crée un fichier `.env` contenant les lignes suivantes :  
+
+```env
+PRIVATE_KEY=votre_clé_privée
+ETHERSCAN_API_KEY=ta_clé_etherscan
+SEPOLIA_URL=https://sepolia.infura.io/v3/ton_project_id
+```
+
+#### 📌 Où trouver ces valeurs :
+
+- **PRIVATE_KEY**  
+  → La clé privée de ton compte Ethereum utilisé pour déployer les contrats.  
+  - ⚠️ **Ne jamais partager cette clé publique**  
+  - Pour la récupérer avec Metamask :
+    1. Aller dans Metamask  
+    2. Compte → Détails du compte  
+    3. Exporter la clé privée (avec ton mot de passe Metamask)
+
+- **ETHERSCAN_API_KEY**  
+  → Clé API générée sur [Etherscan](https://etherscan.io/myapikey)
+  1. Crée un compte sur Etherscan  
+  2. Va dans ton profil → API Keys  
+  3. Crée une clé et copie-la ici
+
+- **SEPOLIA_URL**  
+  → URL du nœud Infura pour se connecter au réseau Sepolia  
+  1. Crée un compte sur [Infura.io](https://infura.io)  
+  2. Crée un projet  
+  3. Récupère l’**Endpoint HTTPS** pour le réseau Sepolia  
+  4. Copie l'URL ici (ressemble à `https://sepolia.infura.io/v3/ton_project_id`)
+
+---
+
+### ✅ Exemple final :
+```env
+PRIVATE_KEY=0x1c2d34abc56d...
+ETHERSCAN_API_KEY=SQMAA52TBBKWSJPZWIBFIYQBDUWNMVFXYI
+SEPOLIA_URL=https://sepolia.infura.io/v3/2f1dc86a4d9346059bc45b29c8331d1b
+```
+
+---
 
 #### 5️⃣ Démarrer PostgreSQL  
 - **Windows :** Vérifier le service "PostgreSQL"  
