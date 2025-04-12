@@ -82,10 +82,12 @@ npm install
 ```
 
 #### 4️⃣ Configurer l'environnement  
-**Dans `/server/.env` :**
-```env
-DATABASE_URL=postgres://utilisateur:motdepasse@localhost:5432/blockchain_diplomes  
-PORT=5000  
+**Dans `/server/config.js` :**
+```config.js
+const sequelize = new Sequelize('blockchain_diplomes', 'postgres', 'votre_mot_de_passe', {
+    host: 'localhost',
+    dialect: 'postgres',
+}); 
 ```
 
 **Dans la racine du projet `/` :**
