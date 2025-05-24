@@ -4,20 +4,30 @@
 
 ## Table des Matières
 1. [Présentation du projet](#présentation)
-2. [Architecture technique](#architecture)
-3. [Installation](#installation)
-4. [Mode d'emploi](#mode-demploi)
-5. [Documentation de l'API](#documentation-de-lapi)
-6. [Sécurité](#sécurité)
-7. [Support](#support)
-8. [Maintenance](#maintenance)
-9. [Contribution](#contribution)
+2. [Fonctionnalités principales](#fonctionnalités-principales)
+3. [Architecture](#architecture)
+4. [Installation](#installation)
+5. [Mode d'emploi](#mode-demploi)
+6. [Documentation de l'API](#documentation-de-lapi)
+7. [Sécurité](#sécurité)
+8. [Support](#support)
+9. [Maintenance](#maintenance)
+10. [Contribution](#contribution)
 
 ## Présentation
 Ce projet permet la création, la vérification et la gestion de diplômes numériques utilisant la technologie blockchain. Il offre une interface utilisateur intuitive pour :
 - Créer des diplômes numériques
 - Vérifier l'authenticité des diplômes via QR Code
-- Consulter la liste des diplômes émis
+- Gérer les utilisateurs et leurs rôles (admin, agent, vérificateur)
+- Se connecter avec MetaMask et lier un wallet à un compte
+
+## Fonctionnalités principales
+- Authentification sécurisée par JWT
+- Gestion des rôles (ADMIN, OFFICE_AGENT, VERIFIER, NONE)
+- Page d'administration pour gérer les utilisateurs et leurs rôles
+- Intégration MetaMask (connexion/déconnexion du wallet)
+- Création et vérification de diplômes via la blockchain
+- Protection des routes frontend et backend selon le rôle
 
 ## Architecture
 
@@ -62,9 +72,10 @@ Ce projet permet la création, la vérification et la gestion de diplômes numé
 
 4. Configurer l'environnement
    - Dans le dossier `server`, créer un fichier `.env` :
-   ```plaintext
-   DATABASE_URL=postgres://votre_utilisateur:votre_mot_de_passe@localhost:5432/blockchain_diplomes
+   ```env
+   DATABASE_URL=postgres://utilisateur:motdepasse@localhost:5432/blockchain_diplomes
    PORT=5000
+   JWT_SECRET=ma_cle_super_secrete
    ```
 
 5. Démarrer PostgreSQL
@@ -79,6 +90,7 @@ Ce projet permet la création, la vérification et la gestion de diplômes numé
 
 7. Démarrer l'application React (dans un nouveau terminal)
    ```bash
+   cd ..
    npm start
    ```
 
@@ -161,8 +173,14 @@ Pour toute question ou problème :
 
 ## Contribution
 1. Fork le projet
-2. Créez une branche (`git checkout -b feature/AmazingFeature`)
-3. Commit vos changements (`git commit -m 'Add some AmazingFeature'`)
-4. Push vers la branche (`git push origin feature/AmazingFeature`)
-5. Ouvrez une Pull Request
-  
+2. Créez une branche (`git checkout -b feature/ma-fonctionnalite`)
+3. Commit tes changements (`git commit -m 'Ajout de ma fonctionnalité'`)
+4. Push vers la branche (`git push origin feature/ma-fonctionnalite`)
+5. Ouvre une Pull Request
+
+## Exemple de .env
+```
+DATABASE_URL=postgres://utilisateur:motdepasse@localhost:5432/blockchain_diplomes
+PORT=5000
+JWT_SECRET=ma_cle_super_secrete
+```

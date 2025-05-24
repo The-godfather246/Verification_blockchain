@@ -157,8 +157,7 @@ function Home() {
           <h1>BlockDoc</h1>
           <p className="subtitle">Sécurisez et vérifiez vos diplômes avec la blockchain</p>
           <div className="cta-buttons">
-            <Link to="/creation" className="cta-button primary">Créer un diplôme</Link>
-            <Link to="/verification" className="cta-button secondary">Vérifier un diplôme</Link>
+           
           </div>
         </div>
       </section>

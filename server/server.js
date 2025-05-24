@@ -1,7 +1,9 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const sequelize = require('./config');
+const sequelize = require('./config/database');
 const Diplome = require('./models/Diplome');
+const authRoutes = require('./routes/auth');
 
 const app = express();
 
@@ -9,10 +11,21 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Synchroniser les modèles avec la base de données
-sequelize.sync()
-    .then(() => console.log('Base de données synchronisée'))
-    .catch(err => console.error('Erreur de synchronisation:', err));
+// Routes
+app.use('/api/auth', authRoutes);
+
+// Test de la connexion à la base de données
+sequelize.authenticate()
+  .then(() => {
+    console.log('Connexion à la base de données établie avec succès.');
+    return sequelize.sync();
+  })
+  .then(() => {
+    console.log('Modèles synchronisés avec la base de données.');
+  })
+  .catch(err => {
+    console.error('Impossible de se connecter à la base de données:', err);
+  });
 
 // Routes
 app.post('/api/diplomes', async (req, res) => {
@@ -55,5 +68,5 @@ app.get('/api/diplomes', async (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-    console.log(`Serveur démarré sur http://localhost:${PORT}`);
+    console.log(`Serveur démarré sur le port ${PORT}`);
 }); 
