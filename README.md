@@ -1,186 +1,218 @@
-# Vérification Blockchain
+---
 
-# Documentation du Projet Blockchain Diplômes
+# 🎓 Vérification Blockchain  
+Documentation du Projet Blockchain Diplômes
+
+---
 
 ## Table des Matières
 1. [Présentation du projet](#présentation)
-2. [Fonctionnalités principales](#fonctionnalités-principales)
-3. [Architecture](#architecture)
-4. [Installation](#installation)
-5. [Mode d'emploi](#mode-demploi)
-6. [Documentation de l'API](#documentation-de-lapi)
-7. [Sécurité](#sécurité)
-8. [Support](#support)
-9. [Maintenance](#maintenance)
-10. [Contribution](#contribution)
+2. [Architecture technique](#architecture)
+3. [Installation](#installation)
+4. [Mode d'emploi](#mode-demploi)
+5. [Documentation de l'API](#documentation-de-lapi)
+6. [Sécurité](#sécurité)
+7. [Support](#support)
+8. [Maintenance](#maintenance)
+9. [Contribution](#contribution)
 
 ## Présentation
 Ce projet permet la création, la vérification et la gestion de diplômes numériques utilisant la technologie blockchain. Il offre une interface utilisateur intuitive pour :
 - Créer des diplômes numériques
 - Vérifier l'authenticité des diplômes via QR Code
-- Gérer les utilisateurs et leurs rôles (admin, agent, vérificateur)
-- Se connecter avec MetaMask et lier un wallet à un compte
+- Consulter la liste des diplômes émis
 
-## Fonctionnalités principales
-- Authentification sécurisée par JWT
-- Gestion des rôles (ADMIN, OFFICE_AGENT, VERIFIER, NONE)
-- Page d'administration pour gérer les utilisateurs et leurs rôles
-- Intégration MetaMask (connexion/déconnexion du wallet)
-- Création et vérification de diplômes via la blockchain
-- Protection des routes frontend et backend selon le rôle
+---
 
-## Architecture
+## 🏗️ Architecture  
 
 ### Frontend (React)
-- `/src/components/` : Composants React
-- `/src/services/` : Services et API
-- `/src/context/` : Contextes React (Web3)
+```
+/src/components/    : Composants React  
+/src/services/      : Services et API  
+/src/context/       : Contextes React (Web3)  
+```
 
 ### Backend (Node.js + Express)
-- `/server/models/` : Modèles PostgreSQL
-- `/server/routes/` : Routes API
-- `/server/server.js` : Point d'entrée du serveur
+```
+/server/models/     : Modèles PostgreSQL  
+/server/routes/     : Routes API  
+/server/server.js   : Point d'entrée du serveur  
+```
+
+### Blockchain (Hardhat + Solidity + Sepolia)
+```
+/contracts/         : Smart contracts Solidity  
+/scripts/           : Scripts de déploiement  
+/src/artifacts/     : ABI des contrats  
+hardhat.config.js   : Config Hardhat  
+```
 
 ### Base de données
 - PostgreSQL : Stockage des diplômes
 
-## Installation
+---
 
-### Prérequis
-- Node.js (v14+)
-- PostgreSQL
-- Git
+## 🛠️ Installation  
 
-### Étapes d'installation
+### Prérequis  
+- Node.js (v14+)  
+- PostgreSQL  
+- Git  
 
-1. Cloner le repository
-   ```bash
-   git clone https://github.com/The-godfather246/Verification_blockchain.git
-   cd blockchain-diplomes
-   ```
+### Étapes  
+#### 1️⃣ Cloner le projet  
+```bash
+git clone https://github.com/The-godfather246/Verification_blockchain.git  
+cd blockchain-diplomes
+```
 
-2. Installer les dépendances frontend
-   ```bash
-   npm install
-   ```
+#### 2️⃣ Installer les dépendances frontend  
+```bash
+npm install
+```
 
-3. Installer les dépendances backend
-   ```bash
-   cd server
-   npm install
-   ```
+#### 3️⃣ Installer les dépendances backend  
+```bash
+cd server
+npm install
+```
 
 4. Configurer l'environnement
    - Dans le dossier `server`, créer un fichier `.env` :
-   ```env
-   DATABASE_URL=postgres://utilisateur:motdepasse@localhost:5432/blockchain_diplomes
+   ```plaintext
+   DATABASE_URL=postgres://votre_utilisateur:votre_mot_de_passe@localhost:5432/blockchain_diplomes
    PORT=5000
-   JWT_SECRET=ma_cle_super_secrete
    ```
 
 5. Démarrer PostgreSQL
    - Windows : Vérifier que le service "PostgreSQL" est en cours d'exécution
    - Linux/Mac : `sudo service postgresql start`
 
-6. Démarrer le serveur
-   ```bash
-   cd server
-   npm run dev
-   ```
+#### 6️⃣ Démarrer le serveur
+```bash
+cd server
+npm run dev
+```
 
 7. Démarrer l'application React (dans un nouveau terminal)
    ```bash
-   cd ..
    npm start
    ```
 
-## Mode d'emploi
+---
 
-### Création d'un diplôme
-1. Accédez à l'onglet "Création"
-2. Remplissez le formulaire avec :
-   - Titre du diplôme
-   - Nom de l'étudiant
-   - Numéro étudiant
-   - Institution
-   - Date d'obtention
-   - Spécialité (optionnel)
-   - Mention (optionnel)
-3. Cliquez sur "Créer le Diplôme"
-4. Un QR Code sera généré
+## 📦 Smart Contracts & Blockchain  
 
-### Vérification d'un diplôme
-1. Accédez à l'onglet "Vérification"
-2. Deux options :
-   - Scanner le QR Code avec la caméra
-   - Entrer manuellement le hash du diplôme
-3. Les informations du diplôme s'afficheront si authentique
+### Compilation  
+```bash
+npx hardhat compile
+```
 
-### Consultation des diplômes
-1. Accédez à l'onglet "Liste"
-2. Utilisez les filtres pour rechercher :
-   - Par nom d'étudiant
-   - Par institution
-   - Par date
-3. Cliquez sur un diplôme pour voir les détails
+### Déploiement Sepolia  
+```bash
+npx hardhat run scripts/deploy.js --network sepolia
+```
 
-## Documentation de l'API
+### Vérification Etherscan  
+```bash
+npx hardhat verify --network sepolia adresse_du_contrat
+```
 
-### Endpoints
+### Structure Blockchain  
+- `DocumentManager.sol` : Gestion des utilisateurs et documents  
+- `scripts/deploy.js` : Script déploiement + ajout utilisateurs test  
+- `.env` : Variables clés Sepolia et Etherscan  
 
-#### Création de diplôme
+---
+
+## 📋 Mode d'emploi  
+
+### Création d'un diplôme  
+1. Aller dans "Création"  
+2. Remplir :
+   - Titre  
+   - Nom étudiant  
+   - Numéro étudiant  
+   - Institution  
+   - Date d'obtention  
+   - Spécialité / Mention (optionnel)  
+3. Cliquer sur "Créer le Diplôme"  
+4. Un QR Code + enregistrement blockchain sont générés  
+
+### Vérification  
+1. Aller dans "Vérification"  
+2. Scanner un QR code **ou** entrer le hash  
+3. Voir les infos si valide  
+
+### Consultation  
+1. Aller dans "Liste"  
+2. Filtrer par :
+   - Nom étudiant  
+   - Institution  
+   - Date  
+3. Cliquer pour voir les détails  
+
+---
+
+## 📖 Documentation de l'API  
+
+### Endpoints  
+
+**Création de diplôme**
 ```
 POST /api/diplomes
 ```
-**Body**:
+Body:
 ```json
 {
-    "hash": "string",
-    "titre": "string",
-    "etudiant": "string",
-    "institution": "string",
-    "dateObtention": "date",
-    "specialite": "string",
-    "mention": "string"
+  "hash": "string",
+  "titre": "string",
+  "etudiant": "string",
+  "institution": "string",
+  "dateObtention": "date",
+  "specialite": "string",
+  "mention": "string"
 }
 ```
 
-#### Vérification de diplôme
+**Vérification**
 ```
 GET /api/diplomes/:hash
 ```
 
-#### Liste des diplômes
+**Liste**
 ```
 GET /api/diplomes
 ```
 
-## Sécurité
-- Les hash sont générés de manière unique
-- Vérification en temps réel
-- Stockage sécurisé dans PostgreSQL
+---
 
-## Support
-Pour toute question ou problème :
-1. Vérifiez que PostgreSQL est en cours d'exécution
-2. Vérifiez les logs du serveur
-3. Vérifiez la console du navigateur (F12)
+## 🔒 Sécurité  
+- Hash uniques  
+- Vérification via blockchain  
+- Stockage sécurisé PostgreSQL  
 
-## Maintenance
-- Sauvegardez régulièrement la base de données
-- Mettez à jour les dépendances npm
-- Surveillez les logs serveur pour les erreurs
+---
+
+## 🛠️ Support  
+- Vérifier PostgreSQL  
+- Logs serveur  
+- Console navigateur  
+
+---
+
+## 🛡️ Maintenance  
+- Sauvegarde régulière  
+- Mise à jour npm  
+- Surveillance logs  
+
+---
 
 ## Contribution
 1. Fork le projet
-2. Créez une branche (`git checkout -b feature/ma-fonctionnalite`)
-3. Commit tes changements (`git commit -m 'Ajout de ma fonctionnalité'`)
-4. Push vers la branche (`git push origin feature/ma-fonctionnalite`)
-5. Ouvre une Pull Request
-
-## Exemple de .env
-```
-DATABASE_URL=postgres://utilisateur:motdepasse@localhost:5432/blockchain_diplomes
-PORT=5000
-JWT_SECRET=ma_cle_super_secrete
-```
+2. Créez une branche (`git checkout -b feature/AmazingFeature`)
+3. Commit vos changements (`git commit -m 'Add some AmazingFeature'`)
+4. Push vers la branche (`git push origin feature/AmazingFeature`)
+5. Ouvrez une Pull Request
+  
