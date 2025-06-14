@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import { useWeb3 } from '../context/Web3Context';
 import { DOCUMENT_MANAGER_ADDRESS, DOCUMENT_MANAGER_ABI } from '../contracts/documentManager';
-import DiplomeABI from '../contracts/DiplomeABI.json'; // À créer plus tard
+//import DiplomeABI from '../contracts/DiplomeABI.json'; // À créer plus tard
 
 export function useContract() {
   const { web3, account } = useWeb3();
