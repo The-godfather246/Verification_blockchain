@@ -77,7 +77,7 @@ const MetaMaskConnect = () => {
       }
     };
   }, []);
-
+useEffect(() => {
   const handleAccountsChanged = async (accounts) => {
     if (accounts.length === 0) {
       // L'utilisateur s'est déconnecté de MetaMask
