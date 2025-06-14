@@ -177,7 +177,7 @@ const VerificationContainer = styled.div`
 `;
 
 function VerificationDiplome() {
-  const [scanResult, setScanResult] = useState(null);
+  //const [scanResult, setScanResult] = useState(null);
   const [diplomeInfo, setDiplomeInfo] = useState(null);
   const [loading, setLoading] = useState(false);
   const [manualHash, setManualHash] = useState('');
