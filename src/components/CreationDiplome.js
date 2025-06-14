@@ -183,7 +183,7 @@ const CreationContainer = styled.div`
 `;
 
 function CreationDiplome() {
-  const { creerDiplome } = useContract();
+  //const { creerDiplome } = useContract();
   const [loading, setLoading] = useState(false);
   const [diplomeInfo, setDiplomeInfo] = useState(null);
   const [step, setStep] = useState(1);
